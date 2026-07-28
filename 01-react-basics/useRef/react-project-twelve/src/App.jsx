@@ -1,0 +1,51 @@
+import React, { useRef } from 'react';
+import { useState } from 'react';
+import './App.css'
+
+function App() {
+  const [time, setTime] = useState(0);
+
+  let timeref = useRef(null);
+
+  function startTimer() {
+    timeref.current = setInterval(() => {
+      setTime( time => time+1)
+    },1000);
+  }
+
+  function stopTimer() {
+    clearInterval(timeref.current);
+    timeref.current = null;
+  }
+
+  function resetTimer(){
+    stopTimer();
+    setTime(0);
+  }
+
+  
+  return (
+    <div>
+      <h1>Stopwatch: {time} seconds</h1>
+      <button onClick={startTimer}>
+        Start
+      </button>
+      <br/>
+      <br/>
+
+    <button onClick={stopTimer}>
+      Stop
+    </button>
+    <br/>
+    <br/>
+
+    <button onClick={resetTimer}>
+      Reset
+    </button>
+    </div>
+  )
+
+}
+
+
+export default App;
